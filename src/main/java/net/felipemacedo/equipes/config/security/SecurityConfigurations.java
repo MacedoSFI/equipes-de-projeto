@@ -50,6 +50,7 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 			.antMatchers("/auth").permitAll()
 			.antMatchers(HttpMethod.DELETE, "/projetos/*").hasRole("MODERADOR")
 			.anyRequest().authenticated()
+			.and().cors()
 			.and()
 			.csrf().disable()
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)// quando autenticar não é para criar sessão
