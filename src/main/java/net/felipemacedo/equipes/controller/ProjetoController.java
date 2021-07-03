@@ -62,29 +62,17 @@ public class ProjetoController {
 
 		return ResponseEntity.ok(new ProjetoDto(projeto));
 	}
-	
-	
-	/*
-	 * @DeleteMapping("/{id}")
-	 * 
-	 * @Transactional public ResponseEntity<?> remover(@PathVariable Long id) {
-	 * Optional<Projeto> optional = projetoRepository.findById(id); if
-	 * (optional.isPresent()) { UsersProjetosRepository.deleteByUsersProjetos(id);
-	 * ProjetoHabilidades.deleteByProjetoHabilidades(id);
-	 * ProjetoRepository.delete(id); return ResponseEntity.ok().build(); } return
-	 * ResponseEntity.notFound().build(); }
-	 */
-	
-	
-	  @DeleteMapping("/{id}")
-	  @Transactional public ResponseEntity<?> remover(@PathVariable Long id) {
-		  Optional<Projeto> optional = projetoRepository.findById(id); 
-		  if (optional.isPresent()) { 
+		
+	@DeleteMapping("/{id}")
+	@Transactional
+	public ResponseEntity<?> remover(@PathVariable Long id) {
+		Optional<Projeto> optional = projetoRepository.findById(id); 
+		if (optional.isPresent()) { 
 			projetoRepository.deleteById(id); return
 			ResponseEntity.ok().build();
-		  }
+		}
 	  
-	  	  return ResponseEntity.notFound().build();
-	  }
+	  	return ResponseEntity.notFound().build();
+	}
 	 
 }
