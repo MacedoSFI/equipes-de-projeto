@@ -38,10 +38,10 @@ public class Projeto {
 	
 	private String descricao;
 	
-//	@ManyToMany
-//	@JoinTable()
-//	@OnDelete(action = OnDeleteAction.CASCADE)
-//	private List<Habilidade> habilidades = new ArrayList<>();
+	@ManyToMany
+	@JoinTable()
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	private List<Habilidade> habilidades = new ArrayList<>();
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "projeto", fetch = FetchType.LAZY)
 	private List<UserProjeto> users = new ArrayList<>();
@@ -69,7 +69,7 @@ public class Projeto {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-/*
+
 	public List<Habilidade> getHabilidades() {
 		return habilidades;
 	}
@@ -77,7 +77,7 @@ public class Projeto {
 	public void setHabilidades(List<Habilidade> habilidades) {
 		this.habilidades = habilidades;
 	}
-*/
+
 	public void adicionarUserAoProjeto(UserProjeto projeto) {
 		projeto.setProjeto(this);
 		this.users.add(projeto);
@@ -87,7 +87,7 @@ public class Projeto {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
-	//	result = prime * result + ((habilidades == null) ? 0 : habilidades.hashCode());
+		result = prime * result + ((habilidades == null) ? 0 : habilidades.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((titulo == null) ? 0 : titulo.hashCode());
 		return result;
@@ -107,11 +107,11 @@ public class Projeto {
 				return false;
 		} else if (!descricao.equals(other.descricao))
 			return false;
-/*		if (habilidades == null) {
+		if (habilidades == null) {
 			if (other.habilidades != null)
 				return false;
 		} else if (!habilidades.equals(other.habilidades))
-			return false;*/
+			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;

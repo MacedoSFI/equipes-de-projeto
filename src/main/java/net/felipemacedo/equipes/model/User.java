@@ -25,6 +25,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 public class User implements UserDetails {
 	
 	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -32,8 +33,9 @@ public class User implements UserDetails {
 	private String password;
 	private String email;
 	
-	//@OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
-	//private List<Habilidade> habilidades = new ArrayList<>();
+	@ManyToMany
+	@JoinTable()
+	private List<Habilidade> habilidades = new ArrayList<>();
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
 	private List<UserProjeto> projetos = new ArrayList<>();
@@ -75,6 +77,15 @@ public class User implements UserDetails {
 		this.email = email;
 	}
 	
+	public List<Habilidade> getHabilidades() {
+		return habilidades;
+	}
+
+	public void setHabilidades(List<Habilidade> habilidades) {
+		this.habilidades = habilidades;
+	}
+
+	
 	//classe utilitária. o user que chama este método passando um UserProjeto, 
 	//está setando este user a lista de projetos
 	//criar um metodo post no controller de user "/{id}/projeto/{id}"
@@ -113,6 +124,7 @@ public class User implements UserDetails {
 		int result = 1;
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((habilidades == null) ? 0 : habilidades.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		result = prime * result + ((perfis == null) ? 0 : perfis.hashCode());
 		result = prime * result + ((projetos == null) ? 0 : projetos.hashCode());
@@ -137,6 +149,11 @@ public class User implements UserDetails {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
+			return false;
+		if (habilidades == null) {
+			if (other.habilidades != null)
+				return false;
+		} else if (!habilidades.equals(other.habilidades))
 			return false;
 		if (password == null) {
 			if (other.password != null)
