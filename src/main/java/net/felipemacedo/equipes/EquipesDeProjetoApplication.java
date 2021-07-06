@@ -9,7 +9,6 @@ public class EquipesDeProjetoApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(EquipesDeProjetoApplication.class, args);
 	}
-//depois procurar no projeto onde tiver ManyToMany conf o fetch para EAGER, que por padrao é LAZY
 }
 
 

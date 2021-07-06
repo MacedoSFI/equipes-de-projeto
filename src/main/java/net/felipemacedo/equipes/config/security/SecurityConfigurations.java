@@ -46,7 +46,6 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 			.authorizeRequests()
 			.antMatchers("/index").permitAll()
 			.antMatchers("/projetos").permitAll()
-			.antMatchers("/ok").permitAll()
 			.antMatchers("/auth").permitAll()
 			.antMatchers(HttpMethod.DELETE, "/projetos/*").hasRole("MODERADOR")
 			.anyRequest().authenticated()
@@ -77,12 +76,14 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 	
 	
 	
+	
+	
 	/*
 	 * public static void main(String[] args) {
 	 * 
 	 * System.out.println(new BCryptPasswordEncoder().encode("1234")); }
+	 * 
+	 * 
 	 */
-	 
-	
 	
 }

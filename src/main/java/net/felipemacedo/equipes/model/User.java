@@ -15,10 +15,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Entity
 @Table(name="users")
@@ -33,6 +32,17 @@ public class User implements UserDetails {
 	private String password;
 	private String email;
 	
+	public User(String username, String email, String password) {
+		this.username = username;
+		this.email = email;
+		this.password = new BCryptPasswordEncoder().encode(password);
+	}
+	
+	public User() {
+
+	}
+
+
 	@ManyToMany
 	@JoinTable()
 	private List<Habilidade> habilidades = new ArrayList<>();
